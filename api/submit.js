@@ -6,6 +6,7 @@ const HUBSPOT_TOKEN = process.env.HUBSPOT_TOKEN;
 module.exports = async (req, res) => {
   // Define allowed origins
   const allowedOrigins = [
+    'https://escape-leaderboard-chronicle.lovable.app/leaderboard',
     'https://preview--escape-leaderboard-chronicle.lovable.app',
     'https://lovable.dev/projects/6fa59be5-1b19-4e03-9112-eb8d9912f6a2',
     'https://6fa59be5-1b19-4e03-9112-eb8d9912f6a2.lovableproject.com'
