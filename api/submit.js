@@ -4,10 +4,24 @@ const axios = require('axios');
 const HUBSPOT_TOKEN = process.env.HUBSPOT_TOKEN;
 
 module.exports = async (req, res) => {
+  // Define allowed origins
+  const allowedOrigins = [
+    'https://preview--escape-leaderboard-chronicle.lovable.app',
+    'https://lovable.dev/projects/6fa59be5-1b19-4e03-9112-eb8d9912f6a2',
+    'https://6fa59be5-1b19-4e03-9112-eb8d9912f6a2.lovableproject.com'
+  ];
+
+  // Get the origin of the request
+  const origin = req.headers.origin;
+
   // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'https://preview--escape-leaderboard-chronicle.lovable.app');
-  //https://lovable.dev/projects/6fa59be5-1b19-4e03-9112-eb8d9912f6a2 add this also
-  res.setHeader('Access-Control-Allow-Origin', 'https://lovable.dev/projects/6fa59be5-1b19-4e03-9112-eb8d9912f6a2');
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    // Fallback for development or allow all (use with caution in production)
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
