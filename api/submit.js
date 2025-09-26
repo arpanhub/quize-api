@@ -4,9 +4,17 @@ const axios = require('axios');
 const HUBSPOT_TOKEN = process.env.HUBSPOT_TOKEN;
 
 module.exports = async (req, res) => {
-   res.setHeader('Access-Control-Allow-Origin', '*'); // or use your domain for better security
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'https://preview--escape-leaderboard-chronicle.lovable.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   const hubspotUrl = 'https://api.hubapi.com/form-integrations/v1/submissions/forms/afaa90c8-44dd-41bd-baf4-b25eca71ea2e';
 
   try {
